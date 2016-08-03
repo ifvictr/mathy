@@ -1,0 +1,90 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+::selection{
+    background: #bdeeff;
+}
+*{
+    font-family: "Roboto", sans-serif;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: #0078a0;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover{
+    color: #004860;
+}
+input[type="number"]{
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #009acd;
+    display: block;
+    font-size: 96px;
+    outline: 0;
+    width: 50%;
+}
+input[type="number"]:focus{
+    border-bottom: solid 4px #009acd;
+}
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+#particles{
+    height: 100%;
+    opacity: 0.3;
+    position: fixed;
+    width: 100%;
+}
+#stats{
+    background: #0078a0;
+    color: #ffffff;
+    opacity: 0.5;
+    position: absolute;
+    top: 8px;
+    width: 100%;
+}
+#timer{
+    background: #00688b;
+    top: 0;
+    height: 8px;
+    position: absolute;
+    width: 100%;
+}
+#problem{
+    font-size: 96px;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    padding: 12px;
+    position: absolute;
+    top: 50%;
+}
+#over{
+    display: none;
+    font-size: 64px;
+    height: 100%;
+    opacity: 0.7;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+#footer > li{
+    display: inline;
+    font-size: 24px;
+}
+#footer > li + li:before{
+    content: "\2022";
+    padding-right: 12px;
+}
+.info{
+    padding: 0;
+}
+.info > li{
+    display: inline;
+    font-size: 36px;
+    padding: 12px;
+}
