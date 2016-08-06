@@ -15,11 +15,13 @@
             timer -= 0.1;
             $("#timer").css("width", ((timer / 15) * 100)+"%");
             if(timer <= 0){
-                zodiac.options.parallax = 0; //Disable parallax
                 clearInterval(interval); //Stop the timer
+                zodiac.options.parallax = 0; //Disable parallax
                 $("#answer").blur();
                 $("#problem, #stats").fadeOut(800);
-                $("#over").fadeIn(2000);
+                $("#over")
+                    .delay(800)
+                    .fadeIn(1500);
             }
         }, 100);
         zodiac = new Zodiac("particles", {
@@ -35,15 +37,15 @@
                 return;
             }
             if(event.keyCode === 13){
-                $(".stats-total").html(++total);
+                $(".info-total").html(++total);
                 if(isCorrect()){
                     (timer + 4) > 15 ? timer = 15 : timer += 4; //If timer + 4 > 15, just set timer to 15
-                    $(".stats-right").html(++right);
+                    $(".info-right").html(++right);
                     makeQuestion(true);
                 }
                 else{
                     timer -= 2;
-                    $(".stats-wrong").html(++wrong);
+                    $(".info-wrong").html(++wrong);
                     $("#answer").css("color", "#ff0000"); //Make the input text red
                     if(++attempts >= 3){
                         makeQuestion(false); //Make a new question, player seems stumped

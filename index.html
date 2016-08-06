@@ -6,36 +6,38 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="icon" href="images/favicon.png" type="image/png">
         <link rel="stylesheet" href="assets/css/style.css">
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/zodiac.min.js"></script>
-        <script src="assets/js/base.js"></script>
     </head>
     <body>
         <canvas id="particles"></canvas>
         <div id="stats">
             <ul class="info">
-                <li><span class="stats-right">0</span> right</li>
-                <li><span class="stats-wrong">0</span> wrong</li>
-                <li><span class="stats-total">0</span> total</li>
+                <li><span class="info-right">0</span> right</li>
+                <li><span class="info-wrong">0</span> wrong</li>
+                <li><span class="info-total">0</span> total</li>
             </ul>
         </div>
         <div id="timer"></div>
         <div id="problem">
-            <span id="number1">1</span> <span id="operator">+</span> <span id="number2">1</span>
+            <span id="number1">1</span>
+            <span id="operator">+</span>
+            <span id="number2">1</span>
             <input type="number" id="answer">
         </div>
         <div id="over">
             <h1>game over</h1>
             <a href="index.html">play again</a>
             <ul class="info">
-                <li><span class="stats-right">0</span> right</li>
-                <li><span class="stats-wrong">0</span> wrong</li>
-                <li><span class="stats-total">0</span> total</li>
+                <li><span class="info-right">0</span> right</li>
+                <li><span class="info-wrong">0</span> wrong</li>
+                <li><span class="info-total">0</span> total</li>
             </ul>
             <ul id="footer">
                 <li>&copy; 2016 <a href="https://ifvictr.github.io" target="_blank">ifvictr</a></li>
-                <li>Source code on <a href="https://github.com/ifvictr/mathy" target="_blank">GitHub</a></li>
+                <li>source code on <a href="https://github.com/ifvictr/mathy" target="_blank">github</a></li>
             </ul>
         </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/zodiac.min.js"></script>
+        <script src="assets/js/base.js"></script>
     </body>
 </html>
