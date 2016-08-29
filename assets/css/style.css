@@ -1,13 +1,21 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 ::selection{
     background: #bdeeff;
 }
-*{
-    font-family: "Roboto", sans-serif;
-}
-html, body{
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, strong, b, i, ol, ul, li{
+    border: 0;
+    font: inherit;
     margin: 0;
     padding: 0;
+    vertical-align: baseline;
+}
+body, input{
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+    font-weight: 300; /* 100 also looks pretty slick, but it's a struggle on smaller devices */
+    line-height: 1;
+    outline: 0;
+    text-transform: lowercase;
 }
 a{
     color: #009acd;
@@ -17,77 +25,138 @@ a{
 a:hover{
     color: #0078a0;
 }
-input[type="number"]{
+input{
     background: transparent;
     border: none;
-    border-bottom: solid 1px #009acd;
+    border-bottom: 1px solid #009acd;
     display: block;
-    font-size: 96px;
-    outline: 0;
+    font-size: inherit;
     width: 50%;
 }
-input[type="number"]:focus{
-    border-bottom: solid 4px #009acd;
+input:focus{
+    border-bottom: 4px solid #009acd;
 }
-input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button{
+input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
 }
+ul{
+    list-style-type: none;
+}
+/* Particle background :D */
 #particles{
     height: 100%;
     opacity: 0.3;
     position: fixed;
     width: 100%;
 }
-#stats{
-    color: #000000;
-    opacity: 0.7;
-    position: absolute;
-    top: 8px;
-    width: 100%;
-}
+/* Timer */
 #timer{
     background: #009acd;
-    height: 8px;
+    height: 0.375em;
     position: absolute;
     top: 0;
     transition: width 0.1s;
     width: 100%;
 }
+/* Stats */
+#stats{
+    color: #000000;
+    opacity: 0.7;
+    position: absolute;
+    top: 0.375em;
+    width: 100%;
+}
+#stats > ul{
+    display: flex;
+}
+#stats > ul > li{
+    background: rgba(255, 255, 255, 0.75);
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+    font-size: 2.5em;
+    padding: 0.3em 0.5em;
+    transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+#stats > ul > li[data-label="title"]{
+    color: #009acd;
+}
+/* Shows when data-style is set to 1, for the underline */
+#stats > ul[data-style="1"] > li[data-label="right"]{
+    border-color: #00b200;
+}
+#stats > ul[data-style="1"] > li[data-label="wrong"]{
+    border-color: #b20000;
+}
+/* Shows when data-style is set to 2, for no underline, instead for colored text */
+#stats > ul[data-style="2"] > li[data-label="right"]{
+    color: #00b200;
+}
+#stats > ul[data-style="2"] > li[data-label="wrong"]{
+    color: #b20000;
+}
+/* Shows when data-style is set to 3, for background */
+#stats > ul[data-style="3"]{
+    color: #ffffff;
+}
+#stats > ul[data-style="3"] > li[data-label="title"]{
+    background: #009acd;
+    color: inherit;
+}
+#stats > ul[data-style="3"] > li[data-label="right"]{
+    background: #00b200;
+}
+#stats > ul[data-style="3"] > li[data-label="wrong"]{
+    background: #b20000;
+}
+/* Math problem, the main ingredient */
 #problem{
-    font-size: 96px;
+    font-size: 6em;
     left: 50%;
     margin: -100px 0 0 -150px;
     opacity: 0.8;
     position: absolute;
     top: 50%;
 }
+/* Game over screen */
 #over{
     display: none;
-    font-size: 64px;
     height: 100%;
     opacity: 0.7;
     position: absolute;
     text-align: center;
-    top: 0;
     width: 100%;
 }
+#over > a{
+    display: block;
+    padding-top: 1.5em;
+    font-size: 3.5em;
+}
+#over > h1{
+    font-size: 8em;
+    padding-top: 1.5em;
+}
+/* Footer */
 #footer{
-    padding: 0;
+    margin-top: 4em;
 }
 #footer > li{
-    display: inline;
-    font-size: 24px;
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0.5em;
 }
-#footer > li + li:before{
-    content: "\2022";
-    padding-right: 12px;
-}
-.info{
-    padding: 0;
-}
-.info > li{
-    display: inline;
-    font-size: 36px;
-    padding: 12px;
+@media screen and (max-width: 736px){
+    #problem{
+        font-size: 4.8em;
+    }
+    #over > a{
+        font-size: 2.2em;
+    }
+    #over > h1{
+        font-size: 6em;
+        padding-top: 0.5em;
+    }
+    #footer > li{
+        font-size: 1.1em;
+    }
 }

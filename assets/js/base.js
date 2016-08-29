@@ -10,18 +10,26 @@
     var interval = null;
     var zodiac = null;
     $(function(){
-        makeQuestion(true);
+        if(location.hash.substr(0, 2) == "#s"){
+            var value = parseInt(location.hash.substr(2));
+            if(value <= 0 || value >= 4){ //If value is not between 0 and 3, exclusively
+                value = 1; //If the value doesn't exist, default back to style #1
+            }
+            $("#stats").find("ul").attr("data-style", value);
+        }
+        makeQuestion(true); //Make the first question
         interval = setInterval(function(){
-            timer -= 0.1;
+            timer -= 0.1; //Decrement by 0.1 seconds, this runs 10 times per second
             $("#timer").css("width", ((timer / 15) * 100)+"%");
             if(timer <= 0){
                 clearInterval(interval); //Stop the timer
                 zodiac.options.parallax = 0; //Disable parallax
-                $("#answer").blur();
-                $("#problem, #stats").fadeOut(800);
+                $("[data-label='mark']").html(["", "?", "!", " (^_^)", " :)", " :P"][getRandomNumber(0, 5)]); //Generate random ending for "play again" message :)
+                $("#answer").blur(); //Un-focus on input
+                $("#problem, #stats").fadeOut(800); //Hide stats and problem
                 $("#over")
-                    .delay(800)
-                    .fadeIn(1500);
+                    .delay(600)
+                    .fadeIn(1600);
             }
         }, 100);
         zodiac = new Zodiac("particles", {
@@ -32,34 +40,42 @@
             linkWidth: 1,
             parallax: 0.6
         });
-        $(document).keypress(function(event){
-            if(timer <= 0){
-                return;
-            }
-            if(event.keyCode === 13){
-                $(".info-total").html(++total);
-                if(isCorrect()){
-                    (timer + 4) > 15 ? timer = 15 : timer += 4; //If timer + 4 > 15, just set timer to 15
-                    $(".info-right").html(++right);
-                    makeQuestion(true);
+        $(window)
+            .on("keypress", function(event){
+                if(timer <= 0){
+                    return;
                 }
-                else{
-                    timer -= 2;
-                    $(".info-wrong").html(++wrong);
-                    $("#answer").css("color", "#ff0000"); //Make the input text red
-                    if(++attempts >= 3){
-                        makeQuestion(false); //Make a new question, player seems stumped
+                if(event.keyCode === 13){
+                    $("[data-label='total']").html(++total);
+                    if(isCorrect()){
+                        (timer + 4) > 15 ? timer = 15 : timer += 4; //If timer + 4 > 15, just set timer to 15
+                        $("[data-label='right']").html(++right);
+                        makeQuestion(true);
+                    }
+                    else{
+                        timer -= 2; //Decrement by 2 seconds
+                        $("[data-label='wrong']").html(++wrong);
+                        $("#answer").css("color", "#b20000"); //Make the input text red
+                        if(++attempts >= 3){
+                            makeQuestion(false); //Make a new question, player seems stumped
+                        }
                     }
                 }
-            }
-        });
+            })
+            .on("click", function(){
+                $("#answer").focus(); //If the player clicks on anything else, it'll still be focused on the answer input
+            });
+        $("[data-label='title']").on("click", function(event){
+            event.preventDefault();
+            var parent = $(this).parent();
+            var style = parseInt(parent.attr("data-style"));
+            console.log(style);
+            parent.attr('data-style', (++style) <= 3 ? style : 1); //If style + 1 is equal or less than 3, keep it, or else start again at 1
+        })
     });
     //Methods
     function getRandomColor(brightness){
-        var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
-        var mix = [brightness * 51, brightness * 51, brightness * 51];
-        var mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x){ return Math.round(x / 2.0); });
-        return "rgb("+mixedrgb.join(",")+")";
+        return "rgb("+[Math.random() * 256 + brightness * 51, Math.random() * 256 + brightness * 51, Math.random() * 256 + brightness * 51].map(function(x){ return Math.round(x / 2); }).join(",")+")";
     }
     function getRandomNumber(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -87,16 +103,16 @@
             min -= getRandomNumber(0, 3);
             max -= getRandomNumber(1, 4);
         }
-        attempts = 0; //Reset attempts to 0
         var number1 = getRandomNumber(min, max);
         var number2 = getRandomNumber(min, max);
         var operator = getRandomOperator();
-        answer = eval(number1+operator+number2);
-        $("#number1").html(number1);
-        $("#number2").html(number2);
-        $("#operator").html(operator);
+        attempts = 0; //Reset attempts to 0
+        answer = eval(number1+operator+number2); //Saves the answer to the newly generated problem
+        $("#n1").html(number1);
+        $("#n2").html(number2);
+        $("#op").html(operator);
         $("#answer")
-            .focus() //Focus to the input
+            .focus() //Focus on the input
             .val("") //Empty previous input
             .css("color", "#000000"); //Reset color to black, in case user had it wrong previously
     }

@@ -8,33 +8,31 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
-        <canvas id="particles"></canvas>
-        <div id="stats">
-            <ul class="info">
-                <li><span class="info-right">0</span> right</li>
-                <li><span class="info-wrong">0</span> wrong</li>
-                <li><span class="info-total">0</span> total</li>
-            </ul>
-        </div>
-        <div id="timer"></div>
-        <div id="problem">
-            <span id="number1">1</span>
-            <span id="operator">+</span>
-            <span id="number2">1</span>
-            <input type="number" id="answer">
-        </div>
-        <div id="over">
-            <h1>game over</h1>
-            <a href="index.html">play again</a>
-            <ul class="info">
-                <li><span class="info-right">0</span> right</li>
-                <li><span class="info-wrong">0</span> wrong</li>
-                <li><span class="info-total">0</span> total</li>
-            </ul>
-            <ul id="footer">
-                <li>&copy; 2016 <a href="https://ifvictr.github.io" target="_blank">ifvictr</a></li>
-                <li>source code on <a href="https://github.com/ifvictr/mathy" target="_blank">github</a></li>
-            </ul>
+        <div id="wrapper">
+            <canvas id="particles"></canvas>
+            <div id="timer"></div>
+            <div id="stats">
+                <ul data-style="1">
+                    <li data-label="title">mathy</li>
+                    <li data-label="right">0</li>
+                    <li data-label="wrong">0</li>
+                </ul>
+            </div>
+            <div id="problem">
+                <span id="n1">1</span>
+                <span id="op">+</span>
+                <span id="n2">1</span>
+                <label for="answer">=</label>
+                <input type="number" id="answer">
+            </div>
+            <div id="over">
+                <h1>Game over</h1>
+                <a href="index.html">Try again<span data-label="mark"></span></a>
+                <ul id="footer">
+                    <li>&copy; 2016 <a href="https://ifvictr.github.io" target="_blank">ifvictr</a></li>
+                    <li>Source code on <a href="https://github.com/ifvictr/mathy" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
         </div>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/zodiac.min.js"></script>
